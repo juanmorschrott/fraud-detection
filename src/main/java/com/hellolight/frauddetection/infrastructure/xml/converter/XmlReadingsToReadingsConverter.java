@@ -1,7 +1,7 @@
-package com.hellolight.frauddetection.infrastructure.file.converter;
+package com.hellolight.frauddetection.infrastructure.xml.converter;
 
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.dto.XmlReadings;
+import com.hellolight.frauddetection.infrastructure.xml.dto.XmlReadings;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

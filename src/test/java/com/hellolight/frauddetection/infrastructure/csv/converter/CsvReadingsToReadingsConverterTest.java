@@ -1,7 +1,6 @@
-package com.hellolight.frauddetection.infrastructure.file.converter;
+package com.hellolight.frauddetection.infrastructure.csv.converter;
 
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.dto.CsvReadings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,11 +22,9 @@ class CsvReadingsToReadingsConverterTest {
     @Test
     public void shouldConvertCsvReadingsToReadings() {
 
-        List<CsvReadings> csvReadings = getCsvReadings();
+        List<Reading> readings = this.converter.convert(getCsvReadings());
 
-        List<Reading> readings = this.converter.convert(csvReadings);
-
-        assertEquals(readings.size(), 3);
+        assertEquals(3, readings.size());
         assertThat(readings.get(0), isA(Reading.class));
     }
 

@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.infrastructure.file.dto;
+package com.hellolight.frauddetection.infrastructure.csv.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;

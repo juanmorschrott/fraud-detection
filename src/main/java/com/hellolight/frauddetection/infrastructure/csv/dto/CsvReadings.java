@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.infrastructure.file.dto;
+package com.hellolight.frauddetection.infrastructure.csv.dto;
 
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;

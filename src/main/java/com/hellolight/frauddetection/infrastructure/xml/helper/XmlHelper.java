@@ -1,11 +1,11 @@
-package com.hellolight.frauddetection.infrastructure.file.helper;
+package com.hellolight.frauddetection.infrastructure.xml.helper;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.converter.XmlReadingsToReadingsConverter;
-import com.hellolight.frauddetection.infrastructure.file.dto.XmlReadings;
+import com.hellolight.frauddetection.infrastructure.xml.converter.XmlReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.xml.dto.XmlReadings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class XmlHelper implements DataAdapter {
+public class XmlHelper {
 
     @Value("${file.path}")
     private String path;
@@ -26,7 +26,6 @@ public class XmlHelper implements DataAdapter {
         this.converter = converter;
     }
 
-    @Override
     public List<Reading> unmarshall(String fileName) throws IOException {
         File file = new ClassPathResource(path + fileName).getFile();
         XmlMapper xmlMapper = new XmlMapper();

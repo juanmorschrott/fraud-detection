@@ -1,7 +1,7 @@
-package com.hellolight.frauddetection.infrastructure.file.converter;
+package com.hellolight.frauddetection.infrastructure.csv.converter;
 
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.dto.CsvReadings;
+import com.hellolight.frauddetection.infrastructure.csv.dto.CsvReadings;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

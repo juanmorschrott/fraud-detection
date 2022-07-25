@@ -1,7 +1,7 @@
 package com.hellolight.frauddetection;
 
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.dto.CsvReadings;
+import com.hellolight.frauddetection.infrastructure.csv.dto.CsvReadings;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -55,6 +55,6 @@ public final class ReadingsFixture {
                 .value(44055L)
                 .build();
 
-        return Arrays.asList(cr1, cr2);
+        return Arrays.asList(cr1, cr2, cr3);
     }
 }

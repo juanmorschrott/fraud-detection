@@ -1,30 +1,25 @@
-package com.hellolight.frauddetection.infrastructure.file.adapter;
+package com.hellolight.frauddetection.infrastructure.csv.adapter;
 
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.domain.port.output.FileReadingsProvider;
-import com.hellolight.frauddetection.infrastructure.file.helper.CsvHelper;
-import com.hellolight.frauddetection.infrastructure.file.helper.XmlHelper;
+import com.hellolight.frauddetection.infrastructure.csv.helper.CsvHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Service
-public class FileReadingsAdapter implements FileReadingsProvider {
+public class CsvReadingsAdapter implements FileReadingsProvider {
 
-    private static final String XML = "xml";
     private static final String CSV = "csv";
     private CsvHelper csvHelper;
-    private XmlHelper xmlHelper;
 
-    public FileReadingsAdapter(final CsvHelper csvHelper, final XmlHelper xmlHelper) {
+    public CsvReadingsAdapter(final CsvHelper csvHelper) {
         this.csvHelper = csvHelper;
-        this.xmlHelper = xmlHelper;
     }
 
     @Override
@@ -32,15 +27,11 @@ public class FileReadingsAdapter implements FileReadingsProvider {
 
         String extension = getFileExtension(fileName);
 
-        if (EMPTY.equals(extension)) {
+        if (!extension.equalsIgnoreCase(CSV)) {
             throw new FraudDetectionException("Not valid file provided");
         }
 
-        return switch (extension) {
-            case XML -> this.xmlHelper.unmarshall(fileName);
-            case CSV -> this.csvHelper.unmarshall(fileName);
-            default -> new ArrayList<>();
-        };
+        return this.csvHelper.unmarshall(fileName);
     }
 
     private String getFileExtension(final String path) {

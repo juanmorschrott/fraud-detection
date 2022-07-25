@@ -1,9 +1,8 @@
-package com.hellolight.frauddetection.infrastructure.file.adapter;
+package com.hellolight.frauddetection.infrastructure.csv.adapter;
 
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.file.helper.CsvHelper;
-import com.hellolight.frauddetection.infrastructure.file.helper.XmlHelper;
+import com.hellolight.frauddetection.infrastructure.csv.helper.CsvHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,23 +19,20 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class FileReadingsAdapterTest {
+class CsvReadingsAdapterTest {
 
     @InjectMocks
-    private FileReadingsAdapter fileReadingsProvider;
+    private CsvReadingsAdapter fileReadingsProvider;
 
     @Mock
     private CsvHelper csvHelper;
-
-    @Mock
-    private XmlHelper xmlHelper;
 
     @Test
     public void shouldGetReadingsByFileName() throws IOException {
 
         when(this.csvHelper.unmarshall(anyString())).thenReturn(getReadings());
 
-        List<Reading> readings = this.fileReadingsProvider.getReadings("file-name.csv");
+        List<Reading> readings = this.fileReadingsProvider.getReadings("data/file-name.csv");
 
         assertEquals(readings.size(), 3);
     }
