@@ -1,7 +1,8 @@
-package com.hellolight.frauddetection.infrastructure.csv.helper;
+package com.hellolight.frauddetection.infrastructure.xml;
 
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.xml.converter.XmlReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.xml.helper.XmlHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,25 +17,24 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class CsvHelperTest {
+public class XmlHelperTest {
 
     @InjectMocks
-    private CsvHelper csvHelper;
+    private XmlHelper xmlHelper;
 
     @Mock
-    private CsvReadingsToReadingsConverter converter;
+    private XmlReadingsToReadingsConverter converter;
 
     @BeforeEach
     public void init() {
-        ReflectionTestUtils.setField(this.csvHelper, "path", "data/");
+        ReflectionTestUtils.setField(this.xmlHelper, "path", "data/");
     }
 
     @Test
     public void shouldReturnReadingsFromCsvFile() throws IOException {
 
-        List<Reading> readings = this.csvHelper.unmarshall("file-name.csv");
+        List<Reading> readings = this.xmlHelper.unmarshall("file-name.xml");
 
         assertThat(readings.size() > 0);
     }
-
 }
