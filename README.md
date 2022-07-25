@@ -2,7 +2,7 @@
 
 ### Dependencies
 
- - Docker & docker-compose
+ - Java JDK 17
 
 ### Run Application
 
@@ -10,5 +10,5 @@ Execute:
 
 ```bash
 $ cd ./fraud-detection
-$ docker-compose up
+$ ./mvnw spring-boot:run
 ```
