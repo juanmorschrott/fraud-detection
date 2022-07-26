@@ -3,7 +3,7 @@ package com.hellolight.frauddetection.domain.service;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.domain.model.Result;
 import com.hellolight.frauddetection.domain.port.input.FraudDetectionService;
-import com.hellolight.frauddetection.domain.port.output.FileReadingsProvider;
+import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
 
 import java.io.IOException;
 import java.util.*;
@@ -14,17 +14,17 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class FraudDetectionServiceImpl implements FraudDetectionService {
 
-    private FileReadingsProvider fileReadingsProvider;
+    private ReadingsProvider readingsProvider;
 
-    public FraudDetectionServiceImpl(final FileReadingsProvider fileReadingsProvider) {
-        this.fileReadingsProvider = fileReadingsProvider;
+    public FraudDetectionServiceImpl(final ReadingsProvider readingsProvider) {
+        this.readingsProvider = readingsProvider;
     }
 
 
     @Override
     public List<Result> detect(String fileName) throws IOException {
 
-        List<Reading> readings = this.fileReadingsProvider.getReadings(fileName);
+        List<Reading> readings = this.readingsProvider.getReadings(fileName);
 
         Map<String, Double> clientMeans = this.calculateMeans(readings);
 

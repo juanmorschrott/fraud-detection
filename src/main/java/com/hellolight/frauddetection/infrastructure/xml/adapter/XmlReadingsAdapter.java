@@ -2,7 +2,7 @@ package com.hellolight.frauddetection.infrastructure.xml.adapter;
 
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.domain.port.output.FileReadingsProvider;
+import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
 import com.hellolight.frauddetection.infrastructure.xml.helper.XmlHelper;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Service
-public class XmlReadingsAdapter implements FileReadingsProvider {
+public class XmlReadingsAdapter implements ReadingsProvider {
 
     private static final String XML = "xml";
     private XmlHelper xmlHelper;
