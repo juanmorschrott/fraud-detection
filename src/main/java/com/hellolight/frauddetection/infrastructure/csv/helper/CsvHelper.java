@@ -5,7 +5,6 @@ import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToR
 import com.hellolight.frauddetection.infrastructure.csv.dto.CsvReadings;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -27,7 +26,7 @@ public class CsvHelper {
     }
 
     public List<Reading> unmarshall(String fileName) throws IOException {
-        File file = new ClassPathResource(path + fileName).getFile();
+        File file = new File(path + fileName);
         Reader targetReader = new FileReader(file);
 
         List<CsvReadings> csvReadings = new CsvToBeanBuilder(targetReader)

@@ -2,9 +2,7 @@ version: "3.9"
 
 services:
 
-  api:
+  fraud-detection:
     image: fraud-detection
     build:
       context: .
-    volumes:
-      - /c/Users/juanm/data:/app/data

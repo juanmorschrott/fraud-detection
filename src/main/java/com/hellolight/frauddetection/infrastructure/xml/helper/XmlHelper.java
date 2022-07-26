@@ -7,7 +7,6 @@ import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.infrastructure.xml.converter.XmlReadingsToReadingsConverter;
 import com.hellolight.frauddetection.infrastructure.xml.dto.XmlReadings;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -27,7 +26,7 @@ public class XmlHelper {
     }
 
     public List<Reading> unmarshall(String fileName) throws IOException {
-        File file = new ClassPathResource(path + fileName).getFile();
+        File file = new File(path + fileName);
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.registerModule(new JavaTimeModule());
         xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

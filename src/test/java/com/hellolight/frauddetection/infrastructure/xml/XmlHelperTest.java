@@ -27,13 +27,13 @@ public class XmlHelperTest {
 
     @BeforeEach
     public void init() {
-        ReflectionTestUtils.setField(this.xmlHelper, "path", "data/");
+        ReflectionTestUtils.setField(this.xmlHelper, "path", "./data/");
     }
 
     @Test
     public void shouldReturnReadingsFromCsvFile() throws IOException {
 
-        List<Reading> readings = this.xmlHelper.unmarshall("file-name.xml");
+        List<Reading> readings = this.xmlHelper.unmarshall("2016-readings.xml");
 
         assertThat(readings.size() > 0);
     }

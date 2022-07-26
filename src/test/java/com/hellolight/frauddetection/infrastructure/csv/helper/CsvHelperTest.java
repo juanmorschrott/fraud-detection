@@ -26,13 +26,13 @@ class CsvHelperTest {
 
     @BeforeEach
     public void init() {
-        ReflectionTestUtils.setField(this.csvHelper, "path", "data/");
+        ReflectionTestUtils.setField(this.csvHelper, "path", "./data/");
     }
 
     @Test
     public void shouldReturnReadingsFromCsvFile() throws IOException {
 
-        List<Reading> readings = this.csvHelper.unmarshall("file-name.csv");
+        List<Reading> readings = this.csvHelper.unmarshall("2016-readings.csv");
 
         assertThat(readings.size() > 0);
     }

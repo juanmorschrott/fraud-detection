@@ -100,6 +100,33 @@ are just for demonstration purposes.
 
 ## Running the application
 
+### Dependencies
+
+- Java JDK 17
+- Maven > 3.6.*
+- Docker & Docker-Compose
+
+### Running The Application
+
+### Using Docker & Docker-Compose
+
+Execute:
+
+```bash
+$ cd ./fraud-detection
+$ docker-compose build
+$ docker-compose run --rm fraud-detection
+```
+
+### Using local JVM & Maven
+
+Execute:
+
+```bash
+$ cd ./fraud-detection
+$ ./mvnw spring-boot:run
+```
+
 The interaction with our application will be a shell. Once started you can run:
 
 ```bash
@@ -113,17 +140,4 @@ detect a possible fraud and show a results table at the end:
 | Client              | Month              | Suspicious         | Median   |
  ---------------------------------------------------------------------------
 | 583ef6329d89b       | SEPTEMBER          | 162078             | 63849,75 |
-```
-
-### Dependencies
-
- - Java JDK 17
-
-### Run Application
-
-Execute:
-
-```bash
-$ cd ./fraud-detection
-$ ./mvnw spring-boot:run
 ```
