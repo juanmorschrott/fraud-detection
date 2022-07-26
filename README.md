@@ -33,7 +33,8 @@ src
 
 ### Domain
 
-All your business logic remains on the domain.
+All your business logic remains on the domain. Here you define your model (the common language that developers and business
+people should use), and the contract with the "outside world". Those are at the /model and /port folders respectively.
 
 ```bash
 src
@@ -56,8 +57,9 @@ src
 
 ### Infrastructure
 
-Inside our last layer we have all the output implementation. Here you can find Database, Cache, Files or any kind of data source that
-implements the output port ReadingsProvider.
+Inside our last layer we have all our output implementation. Here you can find Database, Cache, Files or any kind of data source
+configuration needed in order to make the application work. In our particular business case we have the CsvReadingsProvider
+implementation of ReadingsProvider. The other are just for demonstration purpose.
 
 ```bash
  ├── main
@@ -95,7 +97,7 @@ implements the output port ReadingsProvider.
 
 You can find multi-module and mono-module implementations all over the internet. I choose mono because of simplicity.
 Thought it has several user interaction implementations like rest and cli (input), and a few
-sources like database, CSV or XML files (output), currently it only works with files. The other implementations
+sources like database, CSV or XML files (output), currently it only works with CSV files. The other implementations
 are just for demonstration purposes.
 
 ## Running the application
