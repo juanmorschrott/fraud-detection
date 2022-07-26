@@ -107,8 +107,6 @@ are just for demonstration purposes.
 - Maven > 3.6.*
 - Docker & Docker-Compose
 
-### Running The Application
-
 ### Using Docker & Docker-Compose
 
 Execute:
