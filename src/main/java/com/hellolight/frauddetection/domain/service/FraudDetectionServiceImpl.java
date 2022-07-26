@@ -51,7 +51,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
 
     private List<Reading> obtainReadingsByFileType(final String fileName) throws IOException {
 
-        String extension = this.getFileExtension(fileName);
+        String extension = this.obtainFileExtension(fileName);
 
         if (!extension.equals(CSV) && !extension.equals(XML)) {
             throw new FraudDetectionException("Not valid file provided");
@@ -65,7 +65,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
     }
 
 
-    private String getFileExtension(final String path) {
+    private String obtainFileExtension(final String path) {
 
         return Optional.ofNullable(path)
                 .map(String::toLowerCase)
