@@ -53,7 +53,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
 
         String extension = this.getFileExtension(fileName);
 
-        if (!extension.equalsIgnoreCase(CSV) && !extension.equalsIgnoreCase(XML)) {
+        if (!extension.equals(CSV) && !extension.equals(XML)) {
             throw new FraudDetectionException("Not valid file provided");
         }
 
