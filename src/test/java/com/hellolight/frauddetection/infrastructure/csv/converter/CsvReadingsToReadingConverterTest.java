@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.isA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-class CsvReadingsToReadingsConverterTest {
+class CsvReadingsToReadingConverterTest {
 
     @InjectMocks
     private CsvReadingsToReadingsConverter converter;

@@ -3,6 +3,8 @@ package com.hellolight.frauddetection.infrastructure.csv.adapter;
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
+import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.csv.entity.CsvReading;
 import com.hellolight.frauddetection.infrastructure.csv.helper.CsvHelper;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,11 @@ public class CsvReadingsAdapter implements ReadingsProvider {
 
     private static final String CSV = "csv";
     private CsvHelper csvHelper;
+    private CsvReadingsToReadingsConverter converter;
 
-    public CsvReadingsAdapter(final CsvHelper csvHelper) {
+    public CsvReadingsAdapter(final CsvHelper csvHelper, final CsvReadingsToReadingsConverter converter) {
         this.csvHelper = csvHelper;
+        this.converter = converter;
     }
 
     @Override
@@ -31,7 +35,9 @@ public class CsvReadingsAdapter implements ReadingsProvider {
             throw new FraudDetectionException("Not valid file provided");
         }
 
-        return this.csvHelper.unmarshall(fileName);
+        List<CsvReading> csvReadings = this.csvHelper.unmarshall(fileName);
+
+        return this.converter.convert(csvReadings);
     }
 
     private String getFileExtension(final String path) {

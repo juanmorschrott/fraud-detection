@@ -72,9 +72,8 @@ implementation of ReadingsProvider. The other are just for demonstration purpose
                     │   │ └── CsvReadingsAdapter.java
                     │   ├── converter
                     │   │   └── CsvReadingsToReadingsConverter.java
-                    │   ├── dto
+                    │   ├── entity
                     │   │   ├── CsvReadings.java
-                    │   │   └── XmlReadings.java
                     │   └── helper
                     │       └── CsvHelper.java
                     ├── db
@@ -87,7 +86,7 @@ implementation of ReadingsProvider. The other are just for demonstration purpose
                         │   └── XmlReadingsAdapter.java
                         ├── converter
                         │   └── XmlReadingsToReadingsConverter.java
-                        ├── dto
+                        ├── entity
                         │   └── XmlReadings.java
                         └── helper
                             └── XmlHelper.java
@@ -126,7 +125,7 @@ Execute:
 
 ```bash
 $ cd ./fraud-detection
-$ ./mvnw spring-boot:run
+$ mvn spring-boot:run
 ```
 
 The interaction with our application will be a shell. Once started you can run:

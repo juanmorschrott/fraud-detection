@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.infrastructure.csv.dto;
+package com.hellolight.frauddetection.infrastructure.csv.entity;
 
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
@@ -13,7 +13,7 @@ import java.time.YearMonth;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CsvReadings {
+public class CsvReading {
 
     @CsvBindByPosition(position = 0)
     private String clientId;

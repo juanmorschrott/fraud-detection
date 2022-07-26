@@ -1,7 +1,7 @@
 package com.hellolight.frauddetection.infrastructure.csv.helper;
 
-import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.csv.entity.CsvReading;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class CsvHelperTest {
     @Test
     public void shouldReturnReadingsFromCsvFile() throws IOException {
 
-        List<Reading> readings = this.csvHelper.unmarshall("2016-readings.csv");
+        List<CsvReading> readings = this.csvHelper.unmarshall("2016-readings.csv");
 
         assertThat(readings.size() > 0);
     }

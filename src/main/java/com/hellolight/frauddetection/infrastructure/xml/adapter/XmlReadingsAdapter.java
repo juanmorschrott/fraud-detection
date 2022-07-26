@@ -3,6 +3,8 @@ package com.hellolight.frauddetection.infrastructure.xml.adapter;
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
+import com.hellolight.frauddetection.infrastructure.xml.converter.XmlReadingsToReadingsConverter;
+import com.hellolight.frauddetection.infrastructure.xml.entity.XmlReadings;
 import com.hellolight.frauddetection.infrastructure.xml.helper.XmlHelper;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,9 @@ public class XmlReadingsAdapter implements ReadingsProvider {
 
     private static final String XML = "xml";
     private XmlHelper xmlHelper;
+    private XmlReadingsToReadingsConverter converter;
 
-    public XmlReadingsAdapter(final XmlHelper xmlHelper) {
+    public XmlReadingsAdapter(final XmlHelper xmlHelper, final XmlReadingsToReadingsConverter converter) {
         this.xmlHelper = xmlHelper;
     }
 
@@ -31,7 +34,9 @@ public class XmlReadingsAdapter implements ReadingsProvider {
             throw new FraudDetectionException("Not valid file provided");
         }
 
-        return this.xmlHelper.unmarshall(fileName);
+        XmlReadings xmlReadings = this.xmlHelper.unmarshall(fileName);
+
+        return this.converter.convert(xmlReadings);
     }
 
     private String getFileExtension(final String path) {
