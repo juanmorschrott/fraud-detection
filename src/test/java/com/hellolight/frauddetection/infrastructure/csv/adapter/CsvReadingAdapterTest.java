@@ -1,6 +1,5 @@
 package com.hellolight.frauddetection.infrastructure.csv.adapter;
 
-import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToReadingsConverter;
 import com.hellolight.frauddetection.infrastructure.csv.helper.CsvHelper;
@@ -16,7 +15,6 @@ import java.util.List;
 import static com.hellolight.frauddetection.ReadingsFixture.getCsvReadings;
 import static com.hellolight.frauddetection.ReadingsFixture.getReadings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -42,14 +40,6 @@ class CsvReadingAdapterTest {
         List<Reading> readings = this.fileReadingsProvider.getReadings("path/file-name.csv");
 
         assertEquals(3, readings.size());
-    }
-
-    @Test
-    public void shouldNotifyNotValidFileWasProvided() {
-
-        FraudDetectionException thrown = assertThrows(FraudDetectionException.class, () -> {
-            this.fileReadingsProvider.getReadings("file-name");
-        });
     }
 
 }

@@ -38,12 +38,13 @@ public class FraudDetectionShell {
 
         List<Result> results = fraudDetectionService.detect(fileName);
 
-        generateTable(results);
+        this.generateTable(results);
     }
 
-    private void generateTable(List<Result> results) {
+    private void generateTable(final List<Result> results) {
         String leftAlignFormat = "| %-19s | %-18s | %-18d | %.2f |%n";
 
+        System.out.println();
         System.out.format("| Client              | Month              | Suspicious         | Median   |%n");
         System.out.format(" ---------------------------------------------------------------------------%n");
 
