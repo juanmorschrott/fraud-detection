@@ -74,7 +74,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
                 .orElse(EMPTY);
     }
 
-    private Map<String, Double> groupClientMeans(List<Reading> readings) {
+    private Map<String, Double> groupClientMeans(final List<Reading> readings) {
 
         return Optional.ofNullable(readings)
                 .orElseGet(ArrayList::new)

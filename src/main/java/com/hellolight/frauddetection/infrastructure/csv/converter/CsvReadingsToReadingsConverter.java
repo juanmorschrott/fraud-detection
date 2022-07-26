@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CsvReadingsToReadingsConverter implements Converter<List<CsvReading>, List<Reading>> {
 
     @Override
-    public List<Reading> convert(List<CsvReading> source) {
+    public List<Reading> convert(final List<CsvReading> source) {
 
         return source.stream()
                 .map(csvReadings -> new Reading(csvReadings.getClientId(),
