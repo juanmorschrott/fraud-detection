@@ -25,10 +25,7 @@ public class FraudDetectionShell {
                  Please put the file you want to scan on the following path:
                  
                  fraud-detection
-                 └───src
-                     └───main
-                         └───resources
-                             └───data
+                 └───data
                              
                  Once the file is located execute the following command:
                  
