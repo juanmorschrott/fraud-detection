@@ -21,7 +21,7 @@ public class DBReadingsAdapter implements ReadingsProvider {
     }
 
     @Override
-    public List<Reading> getReadings(String fileName) throws IOException {
+    public List<Reading> getReadings(final String fileName) throws IOException {
 
         // List<Reading> readings = this.repository.findAll();
 

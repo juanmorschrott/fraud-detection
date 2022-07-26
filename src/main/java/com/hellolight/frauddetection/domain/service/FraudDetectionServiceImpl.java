@@ -32,7 +32,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
     }
 
     @Override
-    public List<Result> detect(String fileName) throws IOException {
+    public List<Result> detect(final String fileName) throws IOException {
 
         List<Reading> readings = this.obtainReadingsByFileType(fileName);
 
@@ -65,12 +65,12 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
     }
 
 
-    private String obtainFileExtension(final String path) {
+    private String obtainFileExtension(final String fileName) {
 
-        return Optional.ofNullable(path)
+        return Optional.ofNullable(fileName)
                 .map(String::toLowerCase)
                 .filter(f -> f.contains("."))
-                .map(f -> f.substring(path.lastIndexOf(".") + 1))
+                .map(f -> f.substring(fileName.lastIndexOf(".") + 1))
                 .orElse(EMPTY);
     }
 

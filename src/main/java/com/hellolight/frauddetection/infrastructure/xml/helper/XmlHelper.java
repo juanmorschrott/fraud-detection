@@ -16,7 +16,8 @@ public class XmlHelper {
     @Value("${file.path}")
     private String path;
 
-    public XmlReadings unmarshall(String fileName) throws IOException {
+    public XmlReadings unmarshall(final String fileName) throws IOException {
+
         File file = new File(path + fileName);
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.registerModule(new JavaTimeModule());

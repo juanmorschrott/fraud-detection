@@ -2,7 +2,7 @@ package com.hellolight.frauddetection.domain.exception;
 
 public class FraudDetectionException extends RuntimeException {
 
-    public FraudDetectionException(String message) {
+    public FraudDetectionException(final String message) {
         super(message);
     }
 
