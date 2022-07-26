@@ -3,7 +3,7 @@
 This very simple and naive application has been created with the intention of show a possible
 hexagonal architecture implementation using Spring Boot.
 The main principle is to structure your application layers in a way that it receives a user interaction (input) and 
-retrieves data from a source (output).
+retrieves or stores data from a source (output).
 
 ![hexagonal architecture](hexagonal-architecture.png)
 
