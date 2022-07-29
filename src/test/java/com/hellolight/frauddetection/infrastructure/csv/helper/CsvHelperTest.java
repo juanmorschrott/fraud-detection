@@ -26,7 +26,7 @@ class CsvHelperTest {
 
     @BeforeEach
     public void init() {
-        ReflectionTestUtils.setField(this.csvHelper, "path", "./data/");
+        ReflectionTestUtils.setField(this.csvHelper, "path", "data/");
     }
 
     @Test

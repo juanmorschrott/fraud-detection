@@ -5,12 +5,12 @@ import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
 import com.hellolight.frauddetection.infrastructure.csv.converter.CsvReadingsToReadingsConverter;
 import com.hellolight.frauddetection.infrastructure.csv.entity.CsvReading;
 import com.hellolight.frauddetection.infrastructure.csv.helper.CsvHelper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
-@Service
+@Component
 public class CsvReadingsAdapter implements ReadingsProvider {
 
     private CsvHelper csvHelper;

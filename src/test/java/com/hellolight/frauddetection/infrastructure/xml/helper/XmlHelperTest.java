@@ -1,7 +1,6 @@
 package com.hellolight.frauddetection.infrastructure.xml.helper;
 
 import com.hellolight.frauddetection.infrastructure.xml.entity.XmlReadings;
-import com.hellolight.frauddetection.infrastructure.xml.helper.XmlHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,10 +10,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
 
-import static com.hellolight.frauddetection.ReadingsFixture.getXmlReadings;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class XmlHelperTest {
@@ -24,7 +20,7 @@ public class XmlHelperTest {
 
     @BeforeEach
     public void init() {
-        ReflectionTestUtils.setField(this.xmlHelper, "path", "./data/");
+        ReflectionTestUtils.setField(this.xmlHelper, "path", "data/");
     }
 
     @Test

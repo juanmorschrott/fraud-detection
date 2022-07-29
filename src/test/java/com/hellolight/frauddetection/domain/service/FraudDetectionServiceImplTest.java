@@ -2,8 +2,7 @@ package com.hellolight.frauddetection.domain.service;
 
 import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Result;
-import com.hellolight.frauddetection.infrastructure.csv.adapter.CsvReadingsAdapter;
-import com.hellolight.frauddetection.infrastructure.xml.adapter.XmlReadingsAdapter;
+import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,17 +25,14 @@ class FraudDetectionServiceImplTest {
     private FraudDetectionServiceImpl fraudDetectionService;
 
     @Mock
-    private CsvReadingsAdapter csvReadingsAdapter;
-
-    @Mock
-    private XmlReadingsAdapter xmlReadingsAdapter;
+    private ReadingsProvider readingsProvider;
 
     @Test
     public void shouldDetectFraudInFileReadings() throws IOException {
 
-        when(this.csvReadingsAdapter.getReadings(anyString())).thenReturn(getReadings());
+        when(this.readingsProvider.getReadings(anyString())).thenReturn(getReadings());
 
-        List<Result> results = this.fraudDetectionService.detect("data/file-name.csv");
+        List<Result> results = this.fraudDetectionService.detect("data/file-name.xml");
 
         assertThat(results).isNotNull();
     }

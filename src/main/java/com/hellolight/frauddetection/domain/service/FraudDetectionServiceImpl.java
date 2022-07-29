@@ -4,8 +4,7 @@ import com.hellolight.frauddetection.domain.exception.FraudDetectionException;
 import com.hellolight.frauddetection.domain.model.Reading;
 import com.hellolight.frauddetection.domain.model.Result;
 import com.hellolight.frauddetection.domain.port.input.FraudDetectionService;
-import com.hellolight.frauddetection.infrastructure.csv.adapter.CsvReadingsAdapter;
-import com.hellolight.frauddetection.infrastructure.xml.adapter.XmlReadingsAdapter;
+import com.hellolight.frauddetection.domain.port.output.ReadingsProvider;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,24 +18,20 @@ import static java.util.stream.Collectors.groupingBy;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class FraudDetectionServiceImpl implements FraudDetectionService {
-
-    private static final String CSV = "csv";
     private static final String XML = "xml";
 
-    private CsvReadingsAdapter csvReadingsAdapter;
-    private XmlReadingsAdapter xmlReadingsAdapter;
+    private ReadingsProvider readingsProvider;
 
-    public FraudDetectionServiceImpl(final CsvReadingsAdapter csvReadingsAdapter, final XmlReadingsAdapter xmlReadingsAdapter) {
-        this.csvReadingsAdapter = csvReadingsAdapter;
-        this.xmlReadingsAdapter = xmlReadingsAdapter;
+    public FraudDetectionServiceImpl(final ReadingsProvider readingsProvider) {
+        this.readingsProvider = readingsProvider;
     }
 
     @Override
     public List<Result> detect(final String fileName) throws IOException {
 
-        List<Reading> readings = this.obtainReadingsByFileType(fileName);
+        List<Reading> readings = this.obtainReadings(fileName);
 
-        Map<String, Double> clientMeans = this.groupClientMeans(readings);
+        Map<String, Double> clientMeans = this.obtainClientMeans(readings);
 
         return readings.stream()
                 .filter(reading -> reading.getValue() > clientMeans.get(reading.getClientId()).floatValue() * 1.5)
@@ -49,19 +44,15 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
                 .collect(Collectors.toList());
     }
 
-    private List<Reading> obtainReadingsByFileType(final String fileName) throws IOException {
+    private List<Reading> obtainReadings(final String fileName) throws IOException {
 
         String extension = this.obtainFileExtension(fileName);
 
-        if (!extension.equals(CSV) && !extension.equals(XML)) {
+        if (!extension.equals(XML)) {
             throw new FraudDetectionException("Not valid file provided");
         }
 
-        return switch (extension) {
-            case CSV -> this.csvReadingsAdapter.getReadings(fileName);
-            case XML -> this.xmlReadingsAdapter.getReadings(fileName);
-            default -> new ArrayList<>();
-        };
+        return this.readingsProvider.getReadings(fileName);
     }
 
 
@@ -74,7 +65,7 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
                 .orElse(EMPTY);
     }
 
-    private Map<String, Double> groupClientMeans(final List<Reading> readings) {
+    private Map<String, Double> obtainClientMeans(final List<Reading> readings) {
 
         return Optional.ofNullable(readings)
                 .orElseGet(ArrayList::new)

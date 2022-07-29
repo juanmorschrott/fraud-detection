@@ -99,7 +99,11 @@ src
 
 ### Notes
 
-You can find multi-module and mono-module implementations all over the internet. I choose mono because of simplicity. Thought it has several user  interaction implementations like rest and cli (input), and a few sources like database, CSV or XML files (output), currently it only works with CSV files. The other implementations are just for demonstration purposes.
+
+You can find multi-module and mono-module implementations all over the internet. I choose mono because of simplicity.
+Thought it has several user interaction implementations like rest and cli (input), and a few
+sources like database, CSV or XML files (output), currently it only works with XML files. The other implementations
+are just for demonstration purposes.
 
 ## Running the application
 

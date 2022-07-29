@@ -29,7 +29,7 @@ public class FraudDetectionShell {
                              
                  Once the file is located execute the following command:
                  
-                 shell:>scan --fileName 2016-readings.csv
+                 shell:>scan --fileName 2016-readings.xml
                """;
     }
 
