@@ -7,6 +7,18 @@ retrieves or stores data from a source (output).
 
 ![hexagonal architecture](hexagonal-architecture.png)
 
+### Context
+
+We are worried about fraud in electricity readings, and we have decided to implement a suspicious reading detector.
+Some clients have phoned us suspecting some squatters have been tapping into their electricity lines and this is why you 
+may find some extremely high readings compared to their regular usage. At the same time, we suspect some clients are 
+tapping their building electricity lines and you may also find extremely low readings.
+
+As we all know, many systems in Spain are a bit old-fashioned and get some readings in XML and some others in CSV, 
+so we need to be able to implement adaptors for both inputs.
+
+For this first iteration, we will try to identify readings that are either higher or lower than the annual average ± 50%.
+
 ## Layers
 
 Hexagonal Architecture was designed to make your software "pluggable". You should be able to make your pieces interact knowing nothing about each other. The user interaction could be a Rest endpoint and your data source could be a database or a file, it doesn't matter.
