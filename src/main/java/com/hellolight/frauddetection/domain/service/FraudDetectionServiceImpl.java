@@ -52,9 +52,9 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
     private String obtainFileExtension(final String fileName) {
 
         return Optional.ofNullable(fileName)
-                .map(String::toLowerCase)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(fileName.lastIndexOf(".") + 1))
+                .map(String::toLowerCase)
                 .orElse(EMPTY);
     }
 
