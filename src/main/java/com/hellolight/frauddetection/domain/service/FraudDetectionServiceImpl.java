@@ -29,7 +29,11 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
     @Override
     public List<Result> detect(final String fileName) throws IOException {
 
-        List<Reading> readings = this.obtainReadings(fileName);
+        if (!XML.equals(this.obtainFileExtension(fileName))) {
+            throw new FraudDetectionException("Not valid file provided");
+        }
+
+        List<Reading> readings = this.readingsProvider.getReadings(fileName);
 
         Map<String, Double> clientMeans = this.obtainClientMeans(readings);
 
@@ -42,17 +46,6 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
                         .median(clientMeans.get(reading.getClientId()).floatValue())
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    private List<Reading> obtainReadings(final String fileName) throws IOException {
-
-        String extension = this.obtainFileExtension(fileName);
-
-        if (!extension.equals(XML)) {
-            throw new FraudDetectionException("Not valid file provided");
-        }
-
-        return this.readingsProvider.getReadings(fileName);
     }
 
 
