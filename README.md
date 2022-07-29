@@ -17,7 +17,7 @@ tapping their building electricity lines and you may also find extremely low rea
 As we all know, many systems in Spain are a bit old-fashioned and get some readings in XML and some others in CSV, 
 so we need to be able to implement adaptors for both inputs.
 
-For this first iteration, we will try to identify readings that are either higher or lower than the annual average ± 50%.
+For this first iteration, we will try to identify readings that are 50% higher than the annual average.
 
 ## Layers
 
