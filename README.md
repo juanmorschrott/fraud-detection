@@ -64,7 +64,7 @@ src
                          │   ├── input
                          │   │   └── FraudDetectionService.java
                          │   └── output
-                         │       └── FileReadingsProvider.java
+                         │       └── ReadingsProvider.java
                          └── service
                              └── FraudDetectionServiceImpl.java
 ```
@@ -147,10 +147,10 @@ $ mvn spring-boot:run
 The interaction with our application will be a shell. Once started you can run:
 
 ```bash
-shell:>scan --fileName 2016-readings.csv
+shell:>scan --fileName 2016-readings.xml
 ```
 
-It will parse a list of light consumption readings list, searching for a 50% higher of the median one, in order to
+It will parse a list of light consumption readings list, searching for a 50% higher of the average, in order to
 detect a possible fraud and show a results table at the end:
 
 ```bash
