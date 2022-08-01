@@ -3,6 +3,8 @@ package com.hellolight.frauddetection.domain.service;
 import com.google.common.math.Quantiles;
 import com.hellolight.frauddetection.domain.model.Reading;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.*;
@@ -38,21 +40,27 @@ public final class FraudDetectionMathUtils {
      */
     public static Map<String, Double> generateMapWithClientIdAndCalculatedMedian(final List<Reading> readings) {
 
-        Map<String, Double> result = new HashMap<>();
-
-        Optional.ofNullable(readings)
+        return Optional.ofNullable(readings)
                 .orElseGet(ArrayList::new)
                 .stream()
                 .sorted(Comparator.comparing(Reading::getClientId))
                 .collect(groupingBy(
                         Reading::getClientId,
                         Collectors.mapping(Reading::getValue, Collectors.toList())))
-                .forEach((k, v) -> {
-                    double median = Quantiles.median().compute(v);
-                    result.put(k, median);
-                });
+                .entrySet()
+                .stream()
+                .map(entry -> new CalculatedResult(entry.getKey(), Quantiles.median().compute(entry.getValue())))
+                .collect(Collectors.toMap(CalculatedResult::getClientId, CalculatedResult::getValue));
+    }
 
-        return result;
+    @Getter
+    @AllArgsConstructor
+    public static class CalculatedResult {
+
+        private String clientId;
+
+        private Double value;
+
     }
 
 }
