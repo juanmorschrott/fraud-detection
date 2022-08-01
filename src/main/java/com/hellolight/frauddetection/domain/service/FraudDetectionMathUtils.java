@@ -20,10 +20,10 @@ public final class FraudDetectionMathUtils {
      * This method groups the List<Reading> in a Map<String, Double> with the Reading::getClientId as key and
      * the average of Reading::getValue as value.
      *
-     * @param readings
+     * @param readings List of readings
      * @return Map<String, Double>
      */
-    public static Map<String, Double> generateMapWithClientIdAndCalculatedAverage(final List<Reading> readings) {
+    public static Map<String, Double> obtainReadingsMeans(final List<Reading> readings) {
 
         return Optional.ofNullable(readings)
                 .orElseGet(ArrayList::new)
@@ -35,10 +35,10 @@ public final class FraudDetectionMathUtils {
      * This method groups the List<Reading> in a Map<String, Double> with the Reading::getClientId as key and
      * the median of Reading::getValue as value.
      *
-     * @param readings
+     * @param readings List of readings
      * @return Map<String, Double>
      */
-    public static Map<String, Double> generateMapWithClientIdAndCalculatedMedian(final List<Reading> readings) {
+    public static Map<String, Double> obtainReadingsMedians(final List<Reading> readings) {
 
         return Optional.ofNullable(readings)
                 .orElseGet(ArrayList::new)

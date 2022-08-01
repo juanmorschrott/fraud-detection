@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.hellolight.frauddetection.domain.service.FraudDetectionMathUtils.generateMapWithClientIdAndCalculatedAverage;
+import static com.hellolight.frauddetection.domain.service.FraudDetectionMathUtils.obtainReadingsMeans;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class FraudDetectionServiceImpl implements FraudDetectionService {
@@ -34,15 +34,15 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
         List<Reading> readings = this.readingsProvider.getReadings(fileName);
 
         // Average
-        Map<String, Double> clientsCalculatedReadings = generateMapWithClientIdAndCalculatedAverage(readings);
+        Map<String, Double> calculatedReadings = obtainReadingsMeans(readings);
 
         return readings.stream()
-                .filter(reading -> reading.getValue() > clientsCalculatedReadings.get(reading.getClientId()).floatValue() * 1.5)
+                .filter(reading -> reading.getValue() > calculatedReadings.get(reading.getClientId()).floatValue() * 1.5)
                 .map(reading -> Result.builder()
                         .clientId(reading.getClientId())
                         .month(reading.getPeriod().getMonth())
                         .suspiciousReading(reading.getValue())
-                        .median(clientsCalculatedReadings.get(reading.getClientId()).floatValue())
+                        .median(calculatedReadings.get(reading.getClientId()).floatValue())
                         .build())
                 .collect(Collectors.toList());
     }
