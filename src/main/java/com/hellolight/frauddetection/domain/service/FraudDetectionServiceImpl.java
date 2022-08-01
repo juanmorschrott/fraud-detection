@@ -10,11 +10,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.averagingLong;
-import static java.util.stream.Collectors.groupingBy;
+import static com.hellolight.frauddetection.domain.service.FraudDetectionMathUtils.generateMapWithClientIdAndCalculatedAverage;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class FraudDetectionServiceImpl implements FraudDetectionService {
@@ -35,15 +33,16 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
 
         List<Reading> readings = this.readingsProvider.getReadings(fileName);
 
-        Map<String, Double> clientMeans = this.obtainClientMeans(readings);
+        // Average
+        Map<String, Double> clientsCalculatedReadings = generateMapWithClientIdAndCalculatedAverage(readings);
 
         return readings.stream()
-                .filter(reading -> reading.getValue() > clientMeans.get(reading.getClientId()).floatValue() * 1.5)
+                .filter(reading -> reading.getValue() > clientsCalculatedReadings.get(reading.getClientId()).floatValue() * 1.5)
                 .map(reading -> Result.builder()
                         .clientId(reading.getClientId())
                         .month(reading.getPeriod().getMonth())
                         .suspiciousReading(reading.getValue())
-                        .median(clientMeans.get(reading.getClientId()).floatValue())
+                        .median(clientsCalculatedReadings.get(reading.getClientId()).floatValue())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -56,14 +55,6 @@ public class FraudDetectionServiceImpl implements FraudDetectionService {
                 .map(f -> f.substring(fileName.lastIndexOf(".") + 1))
                 .map(String::toLowerCase)
                 .orElse(EMPTY);
-    }
-
-    private Map<String, Double> obtainClientMeans(final List<Reading> readings) {
-
-        return Optional.ofNullable(readings)
-                .orElseGet(ArrayList::new)
-                .stream()
-                .collect(groupingBy(Reading::getClientId, averagingLong(Reading::getValue)));
     }
 
 }
