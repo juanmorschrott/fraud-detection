@@ -35,9 +35,7 @@ public class DetectFraudService implements DetectFraudUseCase {
 
         List<Result> results = obtainResults(readings, readingsMeans);
 
-        this.storeResultPort.save(results);
-
-        return results;
+        return this.storeResultPort.save(results);
     }
 
     private static Map<String, Double> obtainReadingsMeans(List<Reading> readings) {

@@ -18,12 +18,14 @@ public class ResultAdapter implements StoreResultPort {
     }
 
     @Override
-    public void save(List<Result> results) {
+    public List<Result> save(List<Result> results) {
 
         List<ResultEntity> resultEntities = results.stream()
                 .map(result -> this.conversionService.convert(result, ResultEntity.class))
                 .collect(Collectors.toList());
 
-        this.resultRepository.saveAll(resultEntities);
+        return this.resultRepository.saveAll(resultEntities).stream()
+                .map(r -> this.conversionService.convert(r, Result.class))
+                .collect(Collectors.toList());
     }
 }

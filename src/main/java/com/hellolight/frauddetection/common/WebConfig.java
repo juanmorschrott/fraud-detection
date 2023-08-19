@@ -2,6 +2,7 @@ package com.hellolight.frauddetection.common;
 
 import com.hellolight.frauddetection.reading.adapter.in.file.CsvReadingToReadingConverter;
 import com.hellolight.frauddetection.reading.adapter.in.file.XmlReadingsToReadingsConverter;
+import com.hellolight.frauddetection.reading.adapter.out.persistence.ResultEntityToResultConverter;
 import com.hellolight.frauddetection.reading.adapter.out.persistence.ResultToResultEntityConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -15,5 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addConverter(new CsvReadingToReadingConverter());
         registry.addConverter(new XmlReadingsToReadingsConverter());
         registry.addConverter(new ResultToResultEntityConverter());
+        registry.addConverter(new ResultEntityToResultConverter());
     }
 }

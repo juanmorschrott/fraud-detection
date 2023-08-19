@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface StoreResultPort {
 
-    void save(List<Result> result);
+    List<Result> save(List<Result> result);
 }
