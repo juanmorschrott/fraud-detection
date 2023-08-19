@@ -1,11 +1,13 @@
 package com.hellolight.frauddetection;
 
-import com.hellolight.frauddetection.domain.model.Reading;
-import com.hellolight.frauddetection.infrastructure.csv.entity.CsvReading;
-import com.hellolight.frauddetection.infrastructure.xml.entity.XmlReadings;
+import com.hellolight.frauddetection.reading.adapter.in.file.CsvReading;
+import com.hellolight.frauddetection.reading.adapter.in.file.XmlReading;
+import com.hellolight.frauddetection.reading.domain.Reading;
+import com.hellolight.frauddetection.reading.adapter.in.file.XmlReadings;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,19 +43,19 @@ public final class ReadingsFixture {
 
         CsvReading cr1 = CsvReading.builder()
                 .clientId("583ef6329d7b9")
-                .period(YearMonth.of(2016, 1))
+                .period("2016-01")
                 .value(42451L)
                 .build();
 
         CsvReading cr2 = CsvReading.builder()
                 .clientId("583ef6329d7b9")
-                .period(YearMonth.of(2016, 2))
+                .period("2016-01")
                 .value(44279L)
                 .build();
 
         CsvReading cr3 = CsvReading.builder()
                 .clientId("583ef6329d7b9")
-                .period(YearMonth.of(2016, 3))
+                .period("2016-01")
                 .value(44055L)
                 .build();
 
@@ -62,15 +64,14 @@ public final class ReadingsFixture {
 
     public static XmlReadings getXmlReadings() {
 
-        XmlReadings.Reading xmlReading = XmlReadings.Reading
-                .builder()
+        XmlReading xmlReading = XmlReading.builder()
                 .clientId("583ef6329d7b9")
                 .period(YearMonth.of(2016, 1))
                 .value(42451L)
                 .build();
 
         return XmlReadings.builder()
-                .readings(Collections.singletonList(xmlReading))
+                .xmlReadings(Collections.singletonList(xmlReading))
                 .build();
     }
 }

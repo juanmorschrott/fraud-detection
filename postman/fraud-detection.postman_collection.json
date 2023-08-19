@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "a9f47077-ba1f-4537-a363-9626b063cc99",
+		"name": "fraud-detection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "442928"
+	},
+	"item": [
+		{
+			"name": "Detect Fraud",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/scan?file_name=2016-readings.xml",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scan"
+					],
+					"query": [
+						{
+							"key": "file_name",
+							"value": "2016-readings.xml"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

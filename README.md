@@ -2,8 +2,8 @@
 
 This very simple and naive application has been created with the intention of show a possible
 hexagonal architecture implementation using Spring Boot.
-The main goal is to structure your application layers in a way that it receives a user interaction (input) and 
-retrieves or stores data from a source (output).
+The main goal is to structure your application layers in receiving user interactions 
+(web endpoint, cli and files) as input and stores data (database) as output.
 
 ![hexagonal architecture](hexagonal-architecture.png)
 
@@ -17,105 +17,88 @@ tapping their building electricity lines and you may also find extremely low rea
 As we all know, many systems in Spain are a bit old-fashioned and get some readings in XML and some others in CSV, 
 so we need to be able to implement adaptors for both inputs.
 
-For this first iteration, we will try to identify readings that are 50% higher than the annual average.
+For this first iteration, we will try to identify readings that are 50% higher than the annual mean.
 
 ## Layers
 
-Hexagonal Architecture was designed to make your software "pluggable". You should be able to make your pieces interact knowing nothing about each other. The user interaction could be a Rest endpoint and your data source could be a database or a file, it doesn't matter.
+Hexagonal Architecture was designed to make your software "pluggable" following the principle of ports and adapters. 
+You should be able to make your pieces interact knowing nothing about each other. 
+The user interaction could be a Rest endpoint and your data source could be a database or a file, it doesn't matter.
 
 ### Application
 
-This layer contains the user interaction parts. Here you will find Rest Endpoints, user interfaces, scheduled scripts or CLI components.
+This layer is the core of our application. It contains the definitions of our ports and the main functionality.
 
-```bash
-src
-  ├── main
-     ├── java
-         └── com
-             └── hellolight
-                 └── frauddetection
-                     ├── application
-                         ├── cli
-                         │   └── FraudDetectionShell.java
-                         └── rest
-                             └── FraudDetectionController.java
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── hellolight
+│   │   │           └── frauddetection
+...
+│   │   │                   ├── application
+│   │   │                   │   ├── exception
+│   │   │                   │   │   └── InvalidDataFileTypeException.java
+│   │   │                   │   ├── port
+│   │   │                   │   │   ├── in
+│   │   │                   │   │   │   ├── DetectFraudUseCase.java
+│   │   │                   │   │   │   └── ReadingsPort.java
+│   │   │                   │   │   └── out
+│   │   │                   │   │       └── StoreResultPort.java
+│   │   │                   │   └── service
+│   │   │                   │       └── DetectFraudService.java
 ```
 
 ### Domain
 
-All your business logic remains on the domain. Here you define your model (the common language that developers and business
-people should use), and the contract with the "outside world". Those are at the /model and /port folders respectively.
+Domain layer contains the common language that business people and developers should use.
 
-```bash
-src
-  ├── main
-     ├── java
-         └── com
-             └── hellolight
-                 └── frauddetection
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── hellolight
+│   │   │           └── frauddetection
 ...
-                     ├── domain
-                         ├── exception
-                         │   └── FraudDetectionException.java
-                         ├── model
-                         │   ├── Reading.java
-                         │   └── Result.java
-                         ├── port
-                         │   ├── input
-                         │   │   └── FraudDetectionService.java
-                         │   └── output
-                         │       └── ReadingsProvider.java
-                         └── service
-                             └── FraudDetectionServiceImpl.java
+│   │   │                   └── domain
+│   │   │                       ├── Reading.java
+│   │   │                       └── Result.java
 ```
 
-### Infrastructure
+### Adapter
 
-Inside our last layer we have all our output implementation. Here you can find Database, Cache, Files or any kind of data source configuration needed in order to make the application work. In our particular business case we have the Csv and Xml files implementation of ReadingsProvider.
-
-```bash
-src
-  ├── main
-     ├── java
-         └── com
-             └── hellolight
-                 └── frauddetection
-...
-                     └── infrastructure
-                         ├── configuration
-                         │   └── BeanConfiguration.java
-                         ├── csv
-                         │   ├── adapter
-                         │   │   └── CsvReadingsAdapter.java
-                         │   ├── converter
-                         │   │   └── CsvReadingsToReadingsConverter.java
-                         │   ├── entity
-                         │   │   ├── CsvReadings.java
-                         │   └── helper
-                         │       └── CsvHelper.java
-                         ├── db
-                         │   ├── adapter
-                         │   │   └── DBReadingsAdapter.java
-                         │   └── repository
-                         │       └── ReadingsRepository.java
-                         └── xml
-                             ├── adapter
-                             │   └── XmlReadingsAdapter.java
-                             ├── converter
-                             │   └── XmlReadingsToReadingsConverter.java
-                             ├── entity
-                             │   └── XmlReadings.java
-                             └── helper
-                                 └── XmlHelper.java
 ```
-
-### Notes
-
-
-You can find multi-module and mono-module implementations all over the internet. I choose mono because of simplicity.
-Thought it has several user interaction implementations like rest and cli (input), and a few
-sources like database, CSV or XML files (output), currently it only works with XML files. The other implementations
-are just for demonstration purposes.
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── hellolight
+│   │   │           └── frauddetection
+...
+│   │   │                   ├── adapter
+│   │   │                   │   ├── in
+│   │   │                   │   │   ├── cli
+│   │   │                   │   │   │   └── FraudDetectionShell.java
+│   │   │                   │   │   ├── file
+│   │   │                   │   │   │   ├── CsvReader.java
+│   │   │                   │   │   │   ├── CsvReading.java
+│   │   │                   │   │   │   ├── CsvReadingToReadingConverter.java
+│   │   │                   │   │   │   ├── ReadingsAdapter.java
+│   │   │                   │   │   │   ├── XmlReader.java
+│   │   │                   │   │   │   ├── XmlReading.java
+│   │   │                   │   │   │   ├── XmlReadings.java
+│   │   │                   │   │   │   └── XmlReadingsToReadingsConverter.java
+│   │   │                   │   │   └── web
+│   │   │                   │   │       └── FraudDetectionController.java
+│   │   │                   │   └── out
+│   │   │                   │       └── persistence
+│   │   │                   │           ├── ResultAdapter.java
+│   │   │                   │           ├── ResultEntity.java
+│   │   │                   │           ├── ResultRepository.java
+│   │   │                   │           └── ResultToResultEntityConverter.java
+```
 
 ## Running the application
 
@@ -155,7 +138,7 @@ detect a possible fraud and show a results table at the end:
 
 ```bash
 
-| Client              | Month              | Suspicious         | Median   |
+| Client              | Month              | Suspicious         | Mean   |
  ---------------------------------------------------------------------------
 | 583ef6329d89b       | SEPTEMBER          | 162078             | 63849,75 |
 ```
