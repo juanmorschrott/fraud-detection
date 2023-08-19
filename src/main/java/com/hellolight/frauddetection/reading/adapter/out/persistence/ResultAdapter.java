@@ -21,7 +21,7 @@ public class ResultAdapter implements StoreResultPort {
     public void save(List<Result> results) {
 
         List<ResultEntity> resultEntities = results.stream()
-                .map(r -> this.conversionService.convert(r, ResultEntity.class))
+                .map(result -> this.conversionService.convert(result, ResultEntity.class))
                 .collect(Collectors.toList());
 
         this.resultRepository.saveAll(resultEntities);

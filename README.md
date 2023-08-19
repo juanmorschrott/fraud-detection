@@ -69,7 +69,9 @@ Domain layer contains the common language that business people and developers sh
 
 ### Adapter
 
-Here is where you add your adapters. Adapters can be input or output e.g. A REST endpont or a Database.
+Here is where you add your adapters. Adapters can be input or output e.g. A REST endpoint or a Database.
+What defines if an adapter is input or output? Basically an input is data coming from outside the application layer,
+and output is information claimed by the application layer.
 
 ```
 ├── src
