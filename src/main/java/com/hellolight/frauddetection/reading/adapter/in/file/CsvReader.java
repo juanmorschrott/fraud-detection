@@ -5,9 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 
@@ -19,9 +18,8 @@ public class CsvReader {
 
     public List<CsvReading> unmarshall(final String fileName) throws IOException {
         ClassPathResource resource = new ClassPathResource(dataPath + "/" + fileName);
-        File file = resource.getFile();
 
-        Reader targetReader = new FileReader(file);
+        Reader targetReader = new InputStreamReader(resource.getInputStream());
 
         return new CsvToBeanBuilder<CsvReading>(targetReader)
                 .withType(CsvReading.class)
