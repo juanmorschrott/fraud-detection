@@ -1,6 +1,6 @@
 package com.hellolight.frauddetection.reading.adapter.in.web;
 
-import com.hellolight.frauddetection.reading.application.port.in.DetectFraudUseCase;
+import com.hellolight.frauddetection.reading.application.port.in.FraudDetectionUseCase;
 import com.hellolight.frauddetection.reading.domain.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,15 +12,15 @@ import java.util.List;
 @RestController
 public class FraudDetectionController {
 
-    private final DetectFraudUseCase detectFraudService;
+    private final FraudDetectionUseCase fraudDetectionUseCase;
 
-    public FraudDetectionController(DetectFraudUseCase detectFraudService) {
-        this.detectFraudService = detectFraudService;
+    public FraudDetectionController(FraudDetectionUseCase fraudDetectionUseCase) {
+        this.fraudDetectionUseCase = fraudDetectionUseCase;
     }
 
     @PostMapping("/scan")
     public List<Result> scan(@RequestParam(name = "file_name") String fileName) throws IOException {
 
-        return detectFraudService.detect(fileName);
+        return fraudDetectionUseCase.detect(fileName);
     }
 }

@@ -5,10 +5,10 @@ import com.hellolight.frauddetection.reading.adapter.in.file.ReadingsAdapter;
 import com.hellolight.frauddetection.reading.adapter.in.file.XmlReader;
 import com.hellolight.frauddetection.reading.adapter.out.persistence.ResultAdapter;
 import com.hellolight.frauddetection.reading.adapter.out.persistence.ResultRepository;
-import com.hellolight.frauddetection.reading.application.port.in.DetectFraudUseCase;
+import com.hellolight.frauddetection.reading.application.port.in.FraudDetectionUseCase;
 import com.hellolight.frauddetection.reading.application.port.in.ReadingsPort;
 import com.hellolight.frauddetection.reading.application.port.out.StoreResultPort;
-import com.hellolight.frauddetection.reading.application.service.DetectFraudService;
+import com.hellolight.frauddetection.reading.application.service.FraudDetectionService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
@@ -29,8 +29,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    DetectFraudUseCase detectFraudUseCase(ReadingsPort readingsPort, StoreResultPort storeResultPort) {
+    FraudDetectionUseCase fraudDetectionUseCase(ReadingsPort readingsPort, StoreResultPort storeResultPort) {
 
-        return new DetectFraudService(readingsPort, storeResultPort);
+        return new FraudDetectionService(readingsPort, storeResultPort);
     }
 }

@@ -1,6 +1,6 @@
 package com.hellolight.frauddetection.reading.adapter.in.cli;
 
-import com.hellolight.frauddetection.reading.application.port.in.DetectFraudUseCase;
+import com.hellolight.frauddetection.reading.application.port.in.FraudDetectionUseCase;
 import com.hellolight.frauddetection.reading.domain.Result;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -12,10 +12,10 @@ import java.util.List;
 @ShellComponent
 public class FraudDetectionShell {
 
-    private final DetectFraudUseCase detectFraudService;
+    private final FraudDetectionUseCase fraudDetectionUseCase;
 
-    public FraudDetectionShell(DetectFraudUseCase detectFraudService) {
-        this.detectFraudService = detectFraudService;
+    public FraudDetectionShell(FraudDetectionUseCase fraudDetectionUseCase) {
+        this.fraudDetectionUseCase = fraudDetectionUseCase;
     }
 
     @ShellMethod("Provides application information")
@@ -36,7 +36,7 @@ public class FraudDetectionShell {
     @ShellMethod("Initialize fraud detection")
     public void scan(@ShellOption() String fileName) throws IOException {
 
-        List<Result> results = detectFraudService.detect(fileName);
+        List<Result> results = fraudDetectionUseCase.detect(fileName);
 
         this.generateTable(results);
     }

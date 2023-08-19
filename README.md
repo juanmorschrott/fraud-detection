@@ -42,12 +42,12 @@ This layer is the core of our application. It contains the definitions of our po
 │   │   │                   │   │   └── InvalidDataFileTypeException.java
 │   │   │                   │   ├── port
 │   │   │                   │   │   ├── in
-│   │   │                   │   │   │   ├── DetectFraudUseCase.java
+│   │   │                   │   │   │   ├── FraudDetectionUseCase.java
 │   │   │                   │   │   │   └── ReadingsPort.java
 │   │   │                   │   │   └── out
 │   │   │                   │   │       └── StoreResultPort.java
 │   │   │                   │   └── service
-│   │   │                   │       └── DetectFraudService.java
+│   │   │                   │       └── FraudDetectionService.java
 ```
 
 ### Domain

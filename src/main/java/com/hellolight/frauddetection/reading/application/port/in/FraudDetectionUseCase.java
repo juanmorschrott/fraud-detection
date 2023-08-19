@@ -5,7 +5,7 @@ import com.hellolight.frauddetection.reading.domain.Result;
 import java.io.IOException;
 import java.util.List;
 
-public interface DetectFraudUseCase {
+public interface FraudDetectionUseCase {
 
     List<Result> detect(String fileName) throws IOException;
 }
