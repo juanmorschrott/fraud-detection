@@ -25,5 +25,4 @@ public class Result {
 
     @JsonProperty("mean")
     private Float mean;
-
 }

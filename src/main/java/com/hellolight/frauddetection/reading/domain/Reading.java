@@ -18,5 +18,4 @@ public class Reading {
     private YearMonth period;
 
     private Long value;
-
 }

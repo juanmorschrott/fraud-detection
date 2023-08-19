@@ -1,6 +1,6 @@
 package com.hellolight.frauddetection.reading.adapter.in.file;
 
-import com.hellolight.frauddetection.reading.application.exception.InvalidDataFileTypeException;
+import com.hellolight.frauddetection.reading.application.exception.InvalidFileTypeException;
 import com.hellolight.frauddetection.reading.application.port.in.ReadingsPort;
 import com.hellolight.frauddetection.reading.domain.Reading;
 import org.springframework.core.convert.ConversionService;
@@ -47,7 +47,7 @@ public class ReadingsAdapter implements ReadingsPort {
                     .collect(Collectors.toList());
 
         } else {
-            throw new InvalidDataFileTypeException("Not valid file type provided");
+            throw new InvalidFileTypeException("Not valid file type provided");
         }
 
         return readings;
