@@ -69,6 +69,8 @@ Domain layer contains the common language that business people and developers sh
 
 ### Adapter
 
+Here is where you add your adapters. Adapters can be input or output e.g. A REST endpont or a Database.
+
 ```
 ├── src
 │   ├── main
