@@ -131,10 +131,16 @@ $ cd ./fraud-detection
 $ mvn spring-boot:run
 ```
 
-The interaction with our application will be a shell. Once started you can run:
+Now you are able to interact with the shell:
 
 ```bash
 shell:>scan --fileName 2016-readings.xml
+```
+
+or with a request:
+
+```bash
+curl --location --request POST 'localhost:8080/scan?file_name=2016-readings.xml'
 ```
 
 It will parse a list of light consumption readings list, searching for a 50% higher of the average, in order to
