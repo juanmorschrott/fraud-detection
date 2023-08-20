@@ -2,12 +2,11 @@ package com.hellolight.frauddetection;
 
 import com.hellolight.frauddetection.reading.adapter.in.file.CsvReading;
 import com.hellolight.frauddetection.reading.adapter.in.file.XmlReading;
-import com.hellolight.frauddetection.reading.domain.Reading;
 import com.hellolight.frauddetection.reading.adapter.in.file.XmlReadings;
+import com.hellolight.frauddetection.reading.domain.Reading;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collections;

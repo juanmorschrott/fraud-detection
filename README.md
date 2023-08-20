@@ -42,12 +42,12 @@ This layer is the core of our application. It contains the definitions of our po
 │   │   │                   │   │   └── InvalidDataFileTypeException.java
 │   │   │                   │   ├── port
 │   │   │                   │   │   ├── in
-│   │   │                   │   │   │   ├── FraudDetectionUseCase.java
+│   │   │                   │   │   │   ├── DetectFraudUseCase.java
 │   │   │                   │   │   │   └── ReadingsPort.java
 │   │   │                   │   │   └── out
 │   │   │                   │   │       └── StoreResultPort.java
 │   │   │                   │   └── service
-│   │   │                   │       └── FraudDetectionService.java
+│   │   │                   │       └── DetectFraudService.java
 ```
 
 ### Domain
@@ -84,21 +84,21 @@ and output is information claimed by the application layer.
 │   │   │                   ├── adapter
 │   │   │                   │   ├── in
 │   │   │                   │   │   ├── cli
-│   │   │                   │   │   │   └── FraudDetectionShell.java
+│   │   │                   │   │   │   └── DetectFraudShell.java
 │   │   │                   │   │   ├── file
 │   │   │                   │   │   │   ├── CsvReader.java
 │   │   │                   │   │   │   ├── CsvReading.java
 │   │   │                   │   │   │   ├── CsvReadingToReadingConverter.java
-│   │   │                   │   │   │   ├── ReadingsAdapter.java
+│   │   │                   │   │   │   ├── ReadingsFileAdapter.java
 │   │   │                   │   │   │   ├── XmlReader.java
 │   │   │                   │   │   │   ├── XmlReading.java
 │   │   │                   │   │   │   ├── XmlReadings.java
 │   │   │                   │   │   │   └── XmlReadingsToReadingsConverter.java
 │   │   │                   │   │   └── web
-│   │   │                   │   │       └── FraudDetectionController.java
+│   │   │                   │   │       └── DetectFraudController.java
 │   │   │                   │   └── out
 │   │   │                   │       └── persistence
-│   │   │                   │           ├── ResultAdapter.java
+│   │   │                   │           ├── ResultPersistenceAdapter.java
 │   │   │                   │           ├── ResultEntity.java
 │   │   │                   │           ├── ResultRepository.java
 │   │   │                   │           └── ResultToResultEntityConverter.java

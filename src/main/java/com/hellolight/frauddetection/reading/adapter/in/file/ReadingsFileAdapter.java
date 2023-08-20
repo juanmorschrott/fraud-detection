@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-public class ReadingsAdapter implements ReadingsPort {
+public class ReadingsFileAdapter implements ReadingsPort {
 
     private static final String XML = "xml";
     private static final String CSV = "csv";
@@ -21,7 +21,7 @@ public class ReadingsAdapter implements ReadingsPort {
     private final XmlReader xmlReader;
     private final ConversionService conversionService;
 
-    public ReadingsAdapter(CsvReader csvReader, XmlReader xmlReader, ConversionService conversionService) {
+    public ReadingsFileAdapter(CsvReader csvReader, XmlReader xmlReader, ConversionService conversionService) {
         this.csvReader = csvReader;
         this.xmlReader = xmlReader;
         this.conversionService = conversionService;

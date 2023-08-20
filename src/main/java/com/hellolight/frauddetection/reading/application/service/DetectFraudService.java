@@ -1,6 +1,6 @@
 package com.hellolight.frauddetection.reading.application.service;
 
-import com.hellolight.frauddetection.reading.application.port.in.FraudDetectionUseCase;
+import com.hellolight.frauddetection.reading.application.port.in.DetectFraudUseCase;
 import com.hellolight.frauddetection.reading.application.port.in.ReadingsPort;
 import com.hellolight.frauddetection.reading.application.port.out.StoreResultPort;
 import com.hellolight.frauddetection.reading.domain.Reading;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.averagingLong;
 import static java.util.stream.Collectors.groupingBy;
 
-public class FraudDetectionService implements FraudDetectionUseCase {
+public class DetectFraudService implements DetectFraudUseCase {
 
     private final ReadingsPort readingsPort;
     private final StoreResultPort storeResultPort;
 
-    public FraudDetectionService(ReadingsPort readingsPort, StoreResultPort storeResultPort) {
+    public DetectFraudService(ReadingsPort readingsPort, StoreResultPort storeResultPort) {
         this.readingsPort = readingsPort;
         this.storeResultPort = storeResultPort;
     }

@@ -7,12 +7,12 @@ import org.springframework.core.convert.ConversionService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ResultAdapter implements StoreResultPort {
+public class ResultPersistenceAdapter implements StoreResultPort {
 
     private final ResultRepository resultRepository;
     private final ConversionService conversionService;
 
-    public ResultAdapter(ResultRepository resultRepository, ConversionService conversionService) {
+    public ResultPersistenceAdapter(ResultRepository resultRepository, ConversionService conversionService) {
         this.resultRepository = resultRepository;
         this.conversionService = conversionService;
     }
