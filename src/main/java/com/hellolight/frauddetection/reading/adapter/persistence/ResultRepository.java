@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.reading.adapter.out.persistence;
+package com.hellolight.frauddetection.reading.adapter.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

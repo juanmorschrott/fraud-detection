@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.reading.application.port.out;
+package com.hellolight.frauddetection.reading.application.port;
 
 import com.hellolight.frauddetection.reading.domain.Result;
 

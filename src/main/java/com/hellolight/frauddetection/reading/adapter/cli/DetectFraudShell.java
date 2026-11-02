@@ -1,15 +1,14 @@
-package com.hellolight.frauddetection.reading.adapter.in.cli;
+package com.hellolight.frauddetection.reading.adapter.cli;
 
-import com.hellolight.frauddetection.reading.application.port.in.DetectFraudUseCase;
+import com.hellolight.frauddetection.reading.application.usecase.DetectFraudUseCase;
 import com.hellolight.frauddetection.reading.domain.Result;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
+import org.springframework.shell.core.command.annotation.Command;
+import org.springframework.shell.core.command.annotation.Option;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 
-@ShellComponent
+@Component
 public class DetectFraudShell {
 
     private final DetectFraudUseCase detectFraudUseCase;
@@ -18,7 +17,7 @@ public class DetectFraudShell {
         this.detectFraudUseCase = detectFraudUseCase;
     }
 
-    @ShellMethod("Provides application information")
+    @Command(name = "info", description = "Provides application information")
     public String info() {
 
         return """
@@ -33,8 +32,9 @@ public class DetectFraudShell {
                """;
     }
 
-    @ShellMethod("Initialize fraud detection")
-    public void scan(@ShellOption() String fileName) throws IOException {
+    @Command(name = "scan", description = "Detect suspicious readings in a CSV or XML file")
+    public void scan(@Option(longName = "fileName", description = "File name under the configured data directory")
+            String fileName) {
 
         List<Result> results = detectFraudUseCase.detect(fileName);
 
@@ -45,14 +45,14 @@ public class DetectFraudShell {
         String leftAlignFormat = "| %-19s | %-18s | %-18d | %.2f |%n";
 
         System.out.println();
-        System.out.format("| Client              | Month              | Suspicious         | Mean     |%n");
+        System.out.format("| Client              | Period             | Suspicious         | Mean     |%n");
         System.out.format(" ---------------------------------------------------------------------------%n");
 
         results.forEach(result -> System.out.format(leftAlignFormat,
-                result.getClientId(),
-                result.getMonth().name(),
-                result.getSuspiciousReading(),
-                result.getMean()));
+                result.clientId(),
+                result.period(),
+                result.suspiciousReading(),
+                result.mean()));
     }
 
 }

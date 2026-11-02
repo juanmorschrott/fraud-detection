@@ -1,4 +1,4 @@
-package com.hellolight.frauddetection.reading.adapter.in.file;
+package com.hellolight.frauddetection.reading.adapter.file;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;

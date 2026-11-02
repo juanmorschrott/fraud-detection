@@ -1,6 +1,7 @@
-package com.hellolight.frauddetection.reading.adapter.in.file;
+package com.hellolight.frauddetection.reading.adapter.file;
 
 import com.opencsv.bean.CsvBindByPosition;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
