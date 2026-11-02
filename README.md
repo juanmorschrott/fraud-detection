@@ -1,21 +1,16 @@
 # Fraud Detection
 
-A Spring Boot console application demonstrating clean architecture for detecting unusually high electricity readings. It reads CSV and XML files through an interactive Spring Shell and stores detection results in PostgreSQL.
+A Spring Boot console application that detects unusually high electricity readings. It reads CSV and XML files through Spring Shell and stores detection results in PostgreSQL.
+
+## Architecture
+
+The core depends on inbound use cases and outbound ports; the CLI, file readers, and persistence adapter connect those ports to external concerns.
+
+![Application architecture](docs/architecture.svg)
 
 ## Detection rule
 
 A reading is suspicious when it is more than 50% above the mean for the same client and calendar year. The reading being evaluated is included in that mean. This version detects unusually high readings only.
-
-## Architecture
-
-The application separates domain, application, and adapter layers. Dependencies point inward, keeping the business logic independent of the CLI, file formats, and database.
-
-```
-com.hellolight.frauddetection.reading
-├── domain                 Reading, Result (records)
-├── application            Use case, ports, service, exceptions
-└── adapter                CLI, file, persistence
-```
 
 ## Requirements
 

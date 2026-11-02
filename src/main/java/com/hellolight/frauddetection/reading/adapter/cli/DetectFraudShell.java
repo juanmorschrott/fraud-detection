@@ -21,19 +21,16 @@ public class DetectFraudShell {
     public String info() {
 
         return """
-                 Please put the file you want to scan on the following path:
-                 
-                 fraud-detection
-                 └───data
-                             
-                 Once the file is located execute the following command:
-                 
+                 Input files must be available under src/main/resources/data.
+                 Bundled sample files are available there.
+
+                 Scan a file by name:
                  shell:>scan --fileName 2016-readings.xml
                """;
     }
 
     @Command(name = "scan", description = "Detect suspicious readings in a CSV or XML file")
-    public void scan(@Option(longName = "fileName", description = "File name under the configured data directory")
+    public void scan(@Option(longName = "fileName", description = "File name under src/main/resources/data")
             String fileName) {
 
         List<Result> results = detectFraudUseCase.detect(fileName);

@@ -1,6 +1,6 @@
 package com.hellolight.frauddetection.reading.adapter.file;
 
-import com.hellolight.frauddetection.reading.application.exception.InvalidFileTypeException;
+import com.hellolight.frauddetection.reading.application.exception.InvalidReadingsFileException;
 import com.hellolight.frauddetection.reading.application.port.LoadReadingsPort;
 import com.hellolight.frauddetection.reading.domain.Reading;
 
@@ -28,7 +28,7 @@ public class ReadingsFileAdapter implements LoadReadingsPort {
 
         if (fileName == null || fileName.isBlank() || fileName.contains("/")
                 || fileName.contains("\\") || fileName.equals(".") || fileName.equals("..")) {
-            throw new InvalidFileTypeException("A plain file name is required");
+            throw new InvalidReadingsFileException("A plain file name is required");
         }
         
         String fileType = obtainFileExtension(fileName);
@@ -48,7 +48,7 @@ public class ReadingsFileAdapter implements LoadReadingsPort {
                     .toList();
 
         } else {
-            throw new InvalidFileTypeException("Not valid file type provided");
+            throw new InvalidReadingsFileException("Only CSV and XML files are supported");
         }
 
         return readings;

@@ -11,7 +11,7 @@ Spring Boot 4.1 / Spring Shell 4 (`spring-shell-starter-ffm`) console fraud-dete
 ## Conventions
 - Prefer records for immutable data. Mapping between layers uses MapStruct (`*Mapper` interfaces, `componentModel = "spring"`); no Spring `Converter`s.
 - Periods are `YearMonth` in the domain; stored as first-of-month `DATE`. Fraud mean is per client and calendar year.
-- Only plain `.csv`/`.xml` file names under `data.path` are accepted (no paths).
+- Only plain `.csv`/`.xml` file names from `src/main/resources/data` are accepted (no paths).
 - Schema lives in `src/main/resources/sql/schema.sql` (PostgreSQL, idempotent). Config via `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`.
 
 ## Build & test

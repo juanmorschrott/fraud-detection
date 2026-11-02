@@ -1,9 +1,8 @@
 package com.hellolight.frauddetection.reading.adapter.file;
 
-import com.hellolight.frauddetection.reading.application.exception.InvalidFileTypeException;
+import com.hellolight.frauddetection.reading.application.exception.InvalidReadingsFileException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,8 +15,6 @@ class ReadingsFileAdapterTest {
     void setUp() {
         CsvReader csvReader = new CsvReader();
         XmlReader xmlReader = new XmlReader();
-        ReflectionTestUtils.setField(csvReader, "dataPath", "data");
-        ReflectionTestUtils.setField(xmlReader, "dataPath", "data");
         adapter = new ReadingsFileAdapter(
                 csvReader, xmlReader,
                 new ReadingFileMapperImpl());
@@ -42,8 +39,8 @@ class ReadingsFileAdapterTest {
     @Test
     void rejectsPathsAndUnsupportedExtensions() {
         assertThatThrownBy(() -> adapter.load("../readings.csv"))
-                .isInstanceOf(InvalidFileTypeException.class);
+                .isInstanceOf(InvalidReadingsFileException.class);
         assertThatThrownBy(() -> adapter.load("readings.json"))
-                .isInstanceOf(InvalidFileTypeException.class);
+                .isInstanceOf(InvalidReadingsFileException.class);
     }
 }
