@@ -18,6 +18,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class DetectFraudService implements DetectFraudUseCase {
 
+    // A reading is suspicious when it is more than 50% above the client's annual mean.
+    private static final double SUSPICIOUS_THRESHOLD_FACTOR = 1.5;
+
     private final LoadReadingsPort loadReadingsPort;
     private final StoreResultPort storeResultPort;
 
@@ -56,7 +59,7 @@ public class DetectFraudService implements DetectFraudUseCase {
         for (Reading reading : readings) {
             ClientYear key = new ClientYear(reading.clientId(), reading.period().getYear());
             double mean = readingsMeans.get(key);
-            if (reading.value() > mean * 1.5) {
+            if (reading.value() > mean * SUSPICIOUS_THRESHOLD_FACTOR) {
                 results.add(new Result(reading.clientId(), reading.period(), reading.value(), mean));
             }
         }
